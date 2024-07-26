@@ -7,8 +7,42 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
+
+    <style>
+      .animate-in {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 3s ease-out, transform 3s ease-out;
+      }
+      
+      .animate-in.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      </style>
   </head>
   <body>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('p, img, h1, h2, h3, h4, h5, h6');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+      
+        elements.forEach(element => {
+          element.classList.add('animate-in');
+          observer.observe(element);
+        });
+      });
+      </script>
+
+
     <nav id="desktop-nav">
       <div class="logo">Sachin Ajeetkumar Singh</div>
       <div>
